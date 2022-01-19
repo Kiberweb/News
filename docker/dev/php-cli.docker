@@ -1,0 +1,29 @@
+FROM php:7.4-cli
+
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql pgsql \
+    && ln -s /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    && sed -i -e 's/;extension=pgsql/extension=pgsql/' /usr/local/etc/php/php.ini \
+    && sed -i -e 's/;extension=pdo_pgsql/extension=pdo_pgsql/' /usr/local/etc/php/php.ini \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet \
+
+#RUN apt update && apt-get install -y \
+#    build-essential \
+#    libpq-dev \
+#    libzip-dev zip \
+#    unzip \
+#    curl \
+#    zlib1g-dev \
+#    && docker-php-ext-install pdo pdo_pgsql mbstring zip \
+#    && docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
+##    && docker-php-ext-install pdo pdo_pgsql mbstring zip pdo_mysql \
+##    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+##    && docker-php-ext-install mysqli \
+##    && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+##    && docker-php-ext-install zip \
+#
+#    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet
+#
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+WORKDIR /container-app

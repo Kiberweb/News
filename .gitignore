@@ -1,0 +1,15 @@
+./web-app/node_modules
+./web-app/public/hot
+./web-app/public/storage
+./web-app/storage/*.key
+./web-app/vendor
+
+./web-app.env.backup
+./web-app.phpunit.result.cache
+./web-appdocker-compose.override.yml
+./web-appHomestead.json
+./web-appHomestead.yaml
+./web-appnpm-debug.log
+./web-appyarn-error.log
+./web-app/.idea
+./web-app/.vscode

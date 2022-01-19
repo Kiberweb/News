@@ -1,0 +1,94 @@
+version: '3'
+services:
+  nginx_server:
+    build:
+      context: ./docker/dev
+      dockerfile: nginx.docker
+    container_name: nginx_server_lv
+    volumes:
+    - ./web-app:/container-app
+    depends_on:
+      - php_fpm
+    ports:
+    - "7000:80"
+    networks:
+      - inner
+
+  php_fpm:
+    build:
+      context: ./docker/dev
+      dockerfile: php-fpm.docker
+    container_name: php_fpm_lv
+    volumes:
+    - ./web-app:/container-app
+    depends_on:
+#      - db_postgresql
+      - lmp-mysql
+    networks:
+      - inner
+
+  lmp-mysql:
+    image: mysql:8
+    container_name: mysql_lv
+    volumes:
+      - lnpm-mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: lmp
+      MYSQL_USER: lmp
+      MYSQL_PASSWORD: lmp
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - inner
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_lv
+    restart: always
+    ports:
+      - 3000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=lmp-mysql
+      - PMA_PORTS=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    networks:
+      - inner
+
+#  db_postgresql:
+#    container_name: db_postgresql
+#    image: postgres:latest
+#    restart: always
+#    environment:
+#      POSTGRES_DB: "lumen"
+#      POSTGRES_USER: "lumen"
+#      POSTGRES_PASSWORD: "lumen"
+#    volumes:
+#    - ./docker/db:/var/lib/postgresql/data
+#    - ./docker/dev/postgresql.conf:/usr/share/postgresql/postgresql.conf
+#    tty: true
+#    ports:
+#    - "5432:5432"
+#    networks:
+#      - lumenapp
+
+#  pgadmin:
+#    container_name: pgadmin4
+#    image: dpage/pgadmin4
+#    restart: always
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#      PGADMIN_DEFAULT_PASSWORD: pgadmin
+#    ports:
+#    - "5050:80"
+#    networks:
+#      - lumenapp
+
+networks:
+  inner:
+    driver: bridge
+volumes:
+#  db_data_postgresql:
+  lnpm-mysql:
