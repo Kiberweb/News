@@ -127,7 +127,7 @@ class NewsService
 
             return [
                 'status' => 200,
-                'data' => $this->newsHashtags->getHashtagsNews($hashtag[0]->id)[0],
+                'data' => $this->newsHashtags->getHashtagsNews($hashtag[0]->id),
                 'message' => 'news have hashtag',
             ];
         } catch (\Throwable $e) {

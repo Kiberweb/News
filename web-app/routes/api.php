@@ -27,6 +27,6 @@ Route::delete('news/{id}', [NewsController::class, 'destroy']);
 Route::get('/hashtag-link/', [HashtagController::class, 'issetLink']);
 Route::get('hashtag', [HashtagController::class, 'index']);
 Route::get('hashtag/{id}', [HashtagController::class, 'show']);
-Route::post('hashtag-to-news', [HashtagController::class, 'news']);
+Route::post('hashtag', [HashtagController::class, 'store']);
 Route::put('hashtag/{id}', [HashtagController::class, 'update']);
 Route::delete('hashtag/{id}', [HashtagController::class, 'destroy']);

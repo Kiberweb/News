@@ -261,6 +261,8 @@ export default {
                         this.showStatus('news', 'error', 2000);
                     });
             } else {
+                this.news.lang = this.selectedLang;
+                this.news.id_hashtag = this.selectedHashtags;
                 News
                     .update(this.news.id, this.news)
                     .then(response => {
@@ -275,6 +277,7 @@ export default {
                         this.showStatus('news', 'error', 2000);
                     });
             }
+            this.getList();
         },
         saveHashtag() {
             if (this.hashteg.id === undefined) {

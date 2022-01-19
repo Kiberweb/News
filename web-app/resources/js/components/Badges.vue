@@ -1,6 +1,6 @@
 <template>
     <p>
-        <router-link v-for="tag in tags" :key="tag.id" :to="path + tag.name">
+        <router-link v-for="tag in tags" :key="tag.id" :to="path + tag.link">
             <span class="badge bg-info text-dark">#{{ tag.name }}</span>
         </router-link>
     </p>

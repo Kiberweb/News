@@ -26,7 +26,7 @@ class NewsRequest extends FormRequest
         return [
             'title' => 'required|max:255|string',
             'text' => 'required|string',
-            'link' => 'required|unique:news|max:255|string',
+//            'link' => 'required|unique:news|max:255|string',
             'id_hashtag' => 'array',
             'lang' => 'required|string|max:7',
         ];

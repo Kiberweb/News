@@ -6,7 +6,7 @@
                 <h5 class="text-center">Новостей нету</h5>
             </div>
             <div v-else>
-                <card v-for="post in posts" :key="post.id" :post="posts" />
+                <card v-for="post in posts" :key="post.id" :post="post" />
             </div>
         </page>
     </div>

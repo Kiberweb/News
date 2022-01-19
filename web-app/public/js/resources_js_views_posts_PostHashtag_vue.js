@@ -645,7 +645,7 @@ var render = function () {
           : _c(
               "div",
               _vm._l(_vm.posts, function (post) {
-                return _c("card", { key: post.id, attrs: { post: _vm.posts } })
+                return _c("card", { key: post.id, attrs: { post: post } })
               }),
               1
             ),
